@@ -24,6 +24,8 @@ jobs:
           release_name: Release Test ${{ github.event.milestone.title }}
           draft: true
           body_path: "./${{ github.event.milestone.title }}.md"
+      - name: set name and email
+        run: git config --global user.email "releases@example.org"; git config --global user.name "Bob the Builder";
       - name: add tag
         run: git tag -a -m "test-${{ github.event.milestone.title }}" test-${{ github.event.milestone.title }}
       - name: push tag
