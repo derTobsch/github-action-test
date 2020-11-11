@@ -14,12 +14,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USE_MILESTONE_TITLE: "true"
-      - name: Show fs
-        run: ls -la
-      - name: Show fs2
-        run: cat ${{ github.event.milestone.title }}.md
-      - name: Add something at the end
-        run: sed -i '1 i\anything' ${{ github.event.milestone.title }}.md
       - name: Create Draft Release
         id: create_release
         uses: actions/create-release@v1
