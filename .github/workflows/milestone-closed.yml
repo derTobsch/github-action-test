@@ -23,4 +23,4 @@ jobs:
           tag_name: test-${{ github.event.milestone.title }}
           release_name: Release Test ${{ github.event.milestone.title }}
           draft: true
-          bodyFile: ${{ github.event.milestone.title }}.md
+          body_pile: ${{ github.event.milestone.title }}.md
