@@ -1,0 +1,26 @@
+# Trigger the workflow on milestone events
+on:
+  milestone:
+    types: [ closed ]
+
+name: Release Notes
+jobs:
+  create-release-notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Create Release Notes
+        uses: docker://decathlon/release-notes-generator-action:2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USE_MILESTONE_TITLE: "true"
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: test-${{ github.event.milestone.title }}
+          release_name: Release Test ${{ github.event.milestone.title }}
+          draft: true
+          bodyFile: ${{ github.event.milestone.title }}.md
