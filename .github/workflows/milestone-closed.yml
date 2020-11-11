@@ -1,6 +1,7 @@
 # Trigger the workflow on milestone events
 on:
-  push
+  milestone:
+    types: [ closed ]
 
 name: Release Notes
 jobs:
