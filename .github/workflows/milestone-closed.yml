@@ -31,6 +31,6 @@ jobs:
           draft: true
           body_path: "./${{ github.event.milestone.title }}.md"
       - name: add tag
-        run: git tag -l "test-${{ github.event.milestone.title }}"
+        run: git tag -a -m "test-${{ github.event.milestone.title }}" test-${{ github.event.milestone.title }}
       - name: push tag
         run: git push --follow-tags
