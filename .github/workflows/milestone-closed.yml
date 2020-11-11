@@ -1,7 +1,6 @@
 # Trigger the workflow on milestone events
 on:
-  milestone:
-    types: [ closed ]
+  push
 
 name: Release Notes
 jobs:
@@ -30,3 +29,7 @@ jobs:
           release_name: Release Test ${{ github.event.milestone.title }}
           draft: true
           body_path: "./${{ github.event.milestone.title }}.md"
+      - name: add tag
+        run: git tag -l "test-${{ github.event.milestone.title }}"
+      - name: push tag
+        run: git push --follow-tags
